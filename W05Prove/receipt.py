@@ -34,11 +34,19 @@ def read_dictionary(filename,key_column_index):
 def main():
     #Define Indeces
     PROCUDT_ID_INDEX = 0
+    PRODUCT_NAME_INDEX = 1
     QUANTITY_INDEX = 1
-    PRICE_INDEX = 1
+    PRICE_INDEX = 2
 
     #Call read dictionary for products.csv
-    products_dict = read_dictionary("products.csv")
+    products_dict = read_dictionary("products.csv",0)
+
+    #Print out all products
+    print("All Products")
+    print(products_dict)
+
+    #Print out first line of requested items
+    print("Requested items:")
 
     #Opens and reads the request.csv file
     with open("request.csv","rt") as csv_file:
@@ -54,8 +62,13 @@ def main():
             #Get product id
             product_id = row[PROCUDT_ID_INDEX]
 
-            #Get 
-            products_dict[product_id]
+            #Get product name, price, and quantity
+            product_name = products_dict[product_id][PRODUCT_NAME_INDEX]
+            product_price = products_dict[product_id][PRICE_INDEX]
+            quantity = row[QUANTITY_INDEX]
+
+            #Print our requested items
+            print(f'{product_name}: {quantity} @ {product_price}')
 
     return
 
